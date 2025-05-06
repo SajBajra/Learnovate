@@ -1,0 +1,93 @@
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1.5rem;
+  min-height: calc(100vh - 70px - 300px);
+}
+
+.auth-card {
+  background-color: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 500px;
+  border: 1px solid var(--gray-200);
+}
+
+.auth-card h2 {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  color: var(--gray-900);
+  font-weight: 700;
+  font-size: 1.75rem;
+  position: relative;
+}
+
+.auth-card h2::after {
+  content: "";
+  position: absolute;
+  bottom: -0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3rem;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  border-radius: var(--radius-full);
+}
+
+.auth-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--gray-200);
+  color: var(--gray-600);
+  font-size: 0.875rem;
+}
+
+.auth-footer a {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+.demo-accounts {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--gray-200);
+}
+
+.demo-accounts h3 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--gray-700);
+  font-weight: 600;
+}
+
+.demo-account {
+  background-color: var(--gray-100);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  border-left: 3px solid var(--primary-color);
+}
+
+.demo-account p {
+  margin: 0;
+  color: var(--gray-700);
+}
+
+.demo-account strong {
+  color: var(--gray-900);
+}
+
+@media screen and (max-width: 576px) {
+  .auth-card {
+    padding: 1.75rem;
+  }
+}

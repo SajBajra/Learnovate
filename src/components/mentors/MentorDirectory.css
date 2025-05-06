@@ -1,0 +1,295 @@
+.mentor-directory {
+  padding: 2.5rem 0;
+}
+
+.mentor-directory h1 {
+  margin-bottom: 2.5rem;
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.search-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--gray-200);
+}
+
+.search-bar {
+  flex: 1;
+  min-width: 250px;
+  position: relative;
+}
+
+.search-bar .form-control {
+  height: 42px;
+  padding-left: 2.5rem;
+  background-color: var(--gray-100);
+  border-color: var(--gray-200);
+  transition: all 0.2s ease;
+}
+
+.search-bar .form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-500);
+  font-size: 1.1rem;
+}
+
+.filters {
+  flex: 2;
+}
+
+.filter {
+  width: 100%;
+}
+
+.filter label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+  color: var(--gray-700);
+  font-size: 0.85rem;
+}
+
+.filter-icon {
+  margin-right: 0.5rem;
+  color: var(--primary-color);
+}
+
+.skill-filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-filter-btn {
+  background-color: var(--gray-100);
+  border: 1px solid var(--gray-200);
+  color: var(--gray-700);
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.skill-filter-btn:hover {
+  background-color: var(--gray-200);
+  color: var(--gray-900);
+}
+
+.skill-filter-btn.active {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.skill-filter-btn.active:hover {
+  background-color: var(--primary-dark);
+  color: white; /* Ensure text stays white on hover */
+}
+
+.mentors-count {
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.mentors-count i {
+  margin-right: 0.5rem;
+  color: var(--primary-color);
+}
+
+.mentors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.mentor-card {
+  background-color: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--gray-200);
+  transition: var(--transition);
+  height: 100%;
+}
+
+.mentor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-light);
+}
+
+.mentor-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.mentor-image {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  margin-right: 1rem;
+  border: 3px solid var(--gray-200);
+}
+
+.mentor-info {
+  flex: 1;
+}
+
+.mentor-info h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+  color: var(--gray-900);
+  font-weight: 600;
+}
+
+.mentor-rating {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.rating-stars {
+  color: #f59e0b;
+  margin-right: 0.5rem;
+}
+
+.rating-number {
+  color: var(--gray-700);
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.mentor-bio {
+  margin-bottom: 1.25rem;
+  flex: 1;
+  padding: 1rem;
+  background-color: var(--gray-100);
+  border-radius: var(--radius);
+  border: 1px solid var(--gray-200);
+}
+
+.mentor-bio p {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--gray-700);
+}
+
+.mentor-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.skill-badge {
+  background-color: rgba(37, 99, 235, 0.1);
+  color: var(--primary-color);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.skill-badge i {
+  font-size: 0.7rem;
+}
+
+.mentor-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.mentor-actions .btn {
+  flex: 1;
+  font-weight: 500;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  color: white !important; /* Ensure text stays white on hover */
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-outline:hover {
+  background-color: var(--primary-color);
+  color: white !important; /* Ensure text changes to white on hover */
+}
+
+.no-mentors {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  background-color: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--gray-200);
+}
+
+.no-mentors p {
+  margin-bottom: 1.5rem;
+  color: var(--gray-600);
+}
+
+.no-mentors .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .search-filters {
+    flex-direction: column;
+  }
+
+  .mentor-actions {
+    flex-direction: column;
+  }
+}

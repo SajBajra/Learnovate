@@ -1,0 +1,377 @@
+/* Pricing Hero Section */
+.pricing-page {
+  background-color: var(--gray-50);
+}
+
+.pricing-hero {
+  padding: 6rem 0 4rem;
+  text-align: center;
+  background-color: white;
+  position: relative;
+}
+
+.pricing-hero h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: var(--gray-900);
+}
+
+.pricing-hero p {
+  font-size: 1.25rem;
+  color: var(--gray-600);
+  max-width: 600px;
+  margin: 0 auto 3rem;
+}
+
+.pricing-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.pricing-toggle span {
+  font-size: 1rem;
+  color: var(--gray-500);
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.pricing-toggle span.active {
+  color: var(--gray-900);
+  font-weight: 600;
+}
+
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--gray-200);
+  transition: var(--transition);
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: var(--transition);
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--primary-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(30px);
+}
+
+.save-badge {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--success-color);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-full);
+  margin-left: 0.5rem;
+  font-weight: 600;
+}
+
+/* Pricing Plans Section */
+.pricing-plans {
+  padding: 4rem 0 6rem;
+  background-color: var(--gray-50);
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.plan-card {
+  background-color: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2.5rem;
+  border: 1px solid var(--gray-200);
+  transition: var(--transition);
+  position: relative;
+  cursor: pointer;
+}
+
+.plan-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-md);
+}
+
+.plan-card.selected {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+.plan-card.popular {
+  border-color: var(--primary-color);
+  transform: scale(1.05);
+  z-index: 1;
+}
+
+.plan-card.popular:hover {
+  transform: scale(1.05) translateY(-10px);
+}
+
+.popular-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.plan-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.plan-header h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--gray-900);
+}
+
+.plan-header p {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+}
+
+.plan-price {
+  text-align: center;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.currency {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-right: 0.25rem;
+}
+
+.amount {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  line-height: 1;
+}
+
+.period {
+  font-size: 1rem;
+  color: var(--gray-500);
+  margin-left: 0.5rem;
+}
+
+.annual-savings {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.annual-savings p {
+  font-size: 0.875rem;
+  color: var(--success-color);
+  font-weight: 500;
+}
+
+.plan-features {
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.plan-features li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-size: 0.9375rem;
+}
+
+.feature-icon {
+  margin-right: 0.75rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.included .feature-icon {
+  color: var(--success-color);
+}
+
+.excluded .feature-icon {
+  color: var(--gray-400);
+}
+
+.included .feature-text {
+  color: var(--gray-900);
+}
+
+.excluded .feature-text {
+  color: var(--gray-500);
+  text-decoration: line-through;
+}
+
+.plan-cta {
+  text-align: center;
+}
+
+.btn-gray {
+  background-color: var(--gray-800);
+  color: white;
+}
+
+.btn-gray:hover {
+  background-color: var(--gray-900);
+}
+
+.btn-blue {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-blue:hover {
+  background-color: var(--primary-dark);
+}
+
+.btn-purple {
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  color: white;
+}
+
+.btn-purple:hover {
+  background: linear-gradient(135deg, #7c3aed, #5b21b6);
+}
+
+/* Pricing Testimonials Section */
+.pricing-testimonials {
+  padding: 6rem 0;
+  background-color: white;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonial-card {
+  background-color: var(--gray-50);
+  border-radius: var(--radius);
+  padding: 2rem;
+  transition: var(--transition);
+  height: 100%;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow);
+}
+
+.testimonial-content {
+  margin-bottom: 1.5rem;
+}
+
+.testimonial-content p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--gray-700);
+  font-style: italic;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+}
+
+.author-image {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-full);
+  margin-right: 1rem;
+  object-fit: cover;
+}
+
+.author-info h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: var(--gray-900);
+}
+
+.author-info p {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  margin-bottom: 0.5rem;
+}
+
+.plan-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-full);
+}
+
+.plan-badge.free {
+  background-color: rgba(107, 114, 128, 0.1);
+  color: var(--gray-600);
+}
+
+.plan-badge.pro {
+  background-color: rgba(37, 99, 235, 0.1);
+  color: var(--primary-color);
+}
+
+.plan-badge.premium {
+  background-color: rgba(139, 92, 246, 0.1);
+  color: #6d28d9;
+}
+
+/* Pricing FAQ Section */
+.
+\
