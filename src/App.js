@@ -24,9 +24,10 @@ import AdminFeedback from "./components/admin/AdminFeedback"
 import NotFound from "./components/pages/NotFound"
 import LoadingScreen from "./components/common/LoadingScreen"
 import ScheduleManager from "./components/scheduling/ScheduleManager"
+import Challenges from "./components/challenges/Challenges"
 
 // Mock Data
-import { mockUsers, mockSessionRequests, mockFeedback, mockMessages } from "./data/mockData"
+import { mockUsers, mockSessionRequests, mockFeedback, mockMessages, mockChallenges } from "./data/mockData"
 
 // Animation wrapper
 const AnimatedRoutes = ({ children, isAuthenticated, currentUser }) => {
@@ -52,6 +53,7 @@ function App() {
   const [sessionRequests, setSessionRequests] = useState(mockSessionRequests)
   const [feedback, setFeedback] = useState(mockFeedback)
   const [messages, setMessages] = useState(mockMessages)
+  const [challenges, setChallenges] = useState(mockChallenges)
 
   // Check if user is authenticated
   const PrivateRoute = ({ children }) => {
@@ -144,6 +146,19 @@ function App() {
                       sessionRequests={sessionRequests}
                       setSessionRequests={setSessionRequests}
                       simulateLoading={simulateLoading}
+                    />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/challenges"
+                element={
+                  <PrivateRoute>
+                    <Challenges
+                      currentUser={currentUser}
+                      users={users}
+                      mockChallenges={challenges}
+                      setMockChallenges={setChallenges}
                     />
                   </PrivateRoute>
                 }

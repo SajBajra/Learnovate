@@ -189,6 +189,23 @@
   font-size: 0.875rem;
 }
 
+.domain-badge {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--gray-100);
+  color: var(--gray-700);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.domain-badge i {
+  margin-right: 0.4rem;
+  color: var(--primary-color);
+}
+
 .mentor-bio {
   margin-bottom: 1.25rem;
   flex: 1;

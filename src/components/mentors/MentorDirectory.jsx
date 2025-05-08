@@ -8,12 +8,15 @@ import "./MentorDirectory.css"
 
 const MentorDirectory = ({ users, currentUser, sessionRequests, setSessionRequests, simulateLoading }) => {
   const [searchTerm, setSearchTerm] = useState("")
-  const [selectedSkill, setSelectedSkill] = useState("")
+  const [selectedDomain, setSelectedDomain] = useState("")
   const [isFiltering, setIsFiltering] = useState(false)
   const navigate = useNavigate()
 
   // Get all mentors
   const mentors = users.filter((user) => user.role === "mentor")
+
+  // Get all unique domains from mentors
+  const uniqueDomains = [...new Set(mentors.map((mentor) => mentor.domain).filter(Boolean))]
 
   // Get all unique skills from mentors
   const allSkills = [...new Set(mentors.flatMap((mentor) => mentor.skills || []))]
@@ -22,11 +25,13 @@ const MentorDirectory = ({ users, currentUser, sessionRequests, setSessionReques
   const filteredMentors = mentors.filter((mentor) => {
     const matchesSearch =
       mentor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      mentor.skills.some((skill) => skill.toLowerCase().includes(searchTerm.toLowerCase()))
+      mentor.bio.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      mentor.skills.some((skill) => skill.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (mentor.domain && mentor.domain.toLowerCase().includes(searchTerm.toLowerCase()))
 
-    const matchesSkill = !selectedSkill || mentor.skills.includes(selectedSkill)
+    const matchesDomain = !selectedDomain || mentor.domain === selectedDomain
 
-    return matchesSearch && matchesSkill
+    return matchesSearch && matchesDomain
   })
 
   // Animation when filters change
@@ -36,7 +41,7 @@ const MentorDirectory = ({ users, currentUser, sessionRequests, setSessionReques
       setIsFiltering(false)
     }, 300)
     return () => clearTimeout(timer)
-  }, [searchTerm, selectedSkill])
+  }, [searchTerm, selectedDomain])
 
   const handleViewProfile = (mentor) => {
     navigate(`/mentor/${mentor.id}`)
@@ -87,7 +92,7 @@ const MentorDirectory = ({ users, currentUser, sessionRequests, setSessionReques
               <i className="fas fa-search search-icon"></i>
               <input
                 type="text"
-                placeholder="Search by name or skill..."
+                placeholder="Search by name, skill, or domain..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="form-control"
@@ -97,26 +102,26 @@ const MentorDirectory = ({ users, currentUser, sessionRequests, setSessionReques
 
             <div className="filters">
               <div className="filter">
-                <label htmlFor="skill-filter">
-                  <i className="fas fa-tag filter-icon"></i>
-                  Filter by Skill
+                <label htmlFor="domain-filter">
+                  <i className="fas fa-globe filter-icon"></i>
+                  Filter by Domain
                 </label>
                 <div className="skill-filter-options">
                   <button
-                    className={`skill-filter-btn ${selectedSkill === "" ? "active" : ""}`}
-                    onClick={() => setSelectedSkill("")}
+                    className={`skill-filter-btn ${selectedDomain === "" ? "active" : ""}`}
+                    onClick={() => setSelectedDomain("")}
                   >
                     <i className="fas fa-globe-americas"></i>
-                    All
+                    All Domains
                   </button>
-                  {allSkills.map((skill, index) => (
+                  {uniqueDomains.map((domain, index) => (
                     <button
                       key={index}
-                      className={`skill-filter-btn ${selectedSkill === skill ? "active" : ""}`}
-                      onClick={() => setSelectedSkill(skill)}
+                      className={`skill-filter-btn ${selectedDomain === domain ? "active" : ""}`}
+                      onClick={() => setSelectedDomain(domain)}
                     >
-                      <i className="fas fa-code"></i>
-                      {skill}
+                      <i className="fas fa-code-branch"></i>
+                      {domain}
                     </button>
                   ))}
                 </div>
@@ -136,7 +141,7 @@ const MentorDirectory = ({ users, currentUser, sessionRequests, setSessionReques
 
           <AnimatePresence mode="wait">
             <motion.div
-              key={`${searchTerm}-${selectedSkill}`}
+              key={`${searchTerm}-${selectedDomain}`}
               className="mentors-grid"
               variants={containerVariants}
               initial="hidden"
@@ -158,6 +163,11 @@ const MentorDirectory = ({ users, currentUser, sessionRequests, setSessionReques
                           <span className="rating-stars">{"★".repeat(Math.floor(mentor.rating || 0))}</span>
                           <span className="rating-number">{mentor.rating || "No ratings"}</span>
                         </div>
+                        {mentor.domain && (
+                          <div className="domain-badge">
+                            <i className="fas fa-globe"></i> {mentor.domain}
+                          </div>
+                        )}
                       </div>
                     </div>
 
@@ -182,16 +192,16 @@ const MentorDirectory = ({ users, currentUser, sessionRequests, setSessionReques
                         whileTap={{ scale: 0.95 }}
                       >
                         <i className="fas fa-calendar-alt"></i>
-                        View Availability
+                        Book Session
                       </motion.button>
                       <motion.button
                         className="btn btn-outline"
-                        onClick={() => handleViewProfile(mentor)}
+                        onClick={() => navigate(`/schedule?mentorId=${mentor.id}`)}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <i className="fas fa-user"></i>
-                        View Profile
+                        <i className="fas fa-laptop-code"></i>
+                        View Challenges
                       </motion.button>
                     </div>
                   </motion.div>
@@ -208,7 +218,7 @@ const MentorDirectory = ({ users, currentUser, sessionRequests, setSessionReques
                     className="btn btn-outline"
                     onClick={() => {
                       setSearchTerm("")
-                      setSelectedSkill("")
+                      setSelectedDomain("")
                     }}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
