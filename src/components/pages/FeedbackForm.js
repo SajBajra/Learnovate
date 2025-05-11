@@ -146,7 +146,7 @@ const FeedbackForm = () => {
               <h3>Thank You for Your Feedback!</h3>
               <p>
                 We appreciate you taking the time to share your thoughts with us. Your feedback helps us improve the
-                MentorLink platform for everyone.
+                Learnovate platform for everyone.
               </p>
               <motion.button
                 className="btn btn-primary"

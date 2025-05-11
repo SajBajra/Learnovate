@@ -4,6 +4,37 @@
   align-items: center;
   padding: 3rem 1.5rem;
   min-height: calc(100vh - 70px - 300px);
+  background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+  background-size: cover;
+  background-color: var(--primary-color);
+  background-blend-mode: overlay;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  position: relative;
+}
+
+.auth-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(38, 166, 154, 1); /* 100% opacity for primary color */
+  opacity: 0.8; /* Adjusts the overall blending intensity */
+  z-index: -1;
+}
+
+.auth-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+  background-size: cover;
+  opacity: 0.2; /* 20% opacity for the image */
+  z-index: -2;
 }
 
 .auth-card {
@@ -12,13 +43,20 @@
   box-shadow: var(--shadow-md);
   padding: 2.5rem;
   width: 100%;
-  max-width: 500px;
+  max-width: 850px;
   border: 1px solid var(--gray-200);
+  transition: max-width 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.auth-card-wide {
+  max-width: 950px;
 }
 
 .auth-card h2 {
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   color: var(--gray-900);
   font-weight: 700;
   font-size: 1.75rem;
@@ -28,66 +66,334 @@
 .auth-card h2::after {
   content: "";
   position: absolute;
-  bottom: -0.75rem;
+  bottom: -0.5rem;
   left: 50%;
   transform: translateX(-50%);
   width: 3rem;
   height: 3px;
-  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-  border-radius: var(--radius-full);
+  background: var(--primary-color);
+  border-radius: var(--radius);
+}
+
+.auth-card h3 {
+  font-size: 1.25rem;
+  color: var(--gray-700);
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.stepper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: -2rem;
+  position: relative;
+  width: 100%;
+  align-items: center;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 0.5rem;
+  color: var(--gray-500);
+  font-size: 1rem;
+  font-weight: 500;
+  position: relative;
+}
+
+.step .step-number {
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--gray-300);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+.step.active .step-number {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.step.active {
+  color: var(--primary-color);
+}
+
+.stepper::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--gray-300);
+  z-index: 0;
+  transform: translateY(-50%);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 1.75rem;
+}
+
+.form-grid.single-column {
+  grid-template-columns: 1fr;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.form-group.full-width {
+  grid-column: span 2;
+}
+
+.form-group label {
+  display: flex;
+  align-items: center;
+  color: var(--gray-700);
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.form-group label input[type="checkbox"] {
+  margin-right: 0.5rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: var(--primary-color);
+  cursor: pointer;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  color: var(--gray-900);
+  background-color: white;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(38, 166, 154, 0.1);
+}
+
+.form-control[type="file"] {
+  display: none;
+}
+
+.profile-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-placeholder {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: var(--gray-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: var(--gray-500);
+}
+
+.btn-upload {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.5rem 1.25rem;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-upload:hover {
+  background-color: #20897f;
+}
+
+.document-upload-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed var(--gray-300);
+  border-radius: var(--radius);
+  padding: 2rem;
+  background-color: var(--gray-50);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+  text-align: center;
+  min-height: 150px;
+}
+
+.document-upload-wrapper:hover,
+.document-upload-wrapper:focus-within {
+  border-color: var(--primary-color);
+  background-color: var(--gray-100);
+}
+
+.document-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--gray-500);
+}
+
+.cloud-icon {
+  font-size: 2rem;
+}
+
+.form-control[multiple] {
+  height: 120px;
+  padding: 0.5rem;
+}
+
+.form-control textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-navigation {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #20897f;
+  transform: translateY(-1px);
+}
+
+
+.btn-secondary {
+  background-color: var(--gray-500);
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: var(--gray-600);
+  transform: translateY(-1px);
+}
+
+.btn-secondary:disabled {
+  background-color: var(--gray-300);
+  cursor: not-allowed;
+  transform: none;
 }
 
 .auth-footer {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   text-align: center;
   padding-top: 1.5rem;
   border-top: 1px solid var(--gray-200);
-  color: var(--gray-600);
+  color: var(--gray-500);
   font-size: 0.875rem;
 }
 
 .auth-footer a {
   color: var(--primary-color);
   font-weight: 500;
+  text-decoration: none;
 }
 
 .auth-footer a:hover {
   text-decoration: underline;
 }
 
-.demo-accounts {
-  margin-top: 2.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--gray-200);
-}
+@media screen and (max-width: 768px) {
+  .auth-container {
+    padding: 2rem 1rem;
+  }
 
-.demo-accounts h3 {
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  color: var(--gray-700);
-  font-weight: 600;
-}
+  .auth-card,
+  .auth-card-wide {
+    padding: 1.5rem;
+    max-width: 100%;
+  }
 
-.demo-account {
-  background-color: var(--gray-100);
-  padding: 0.75rem 1rem;
-  border-radius: var(--radius);
-  margin-bottom: 0.75rem;
-  font-size: 0.875rem;
-  border-left: 3px solid var(--primary-color);
-}
+  .form-grid,
+  .form-grid.single-column {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 
-.demo-account p {
-  margin: 0;
-  color: var(--gray-700);
-}
+  .auth-card h2 {
+    font-size: 1.5rem;
+  }
 
-.demo-account strong {
-  color: var(--gray-900);
-}
+  .auth-card h3 {
+    font-size: 1.125rem;
+  }
 
-@media screen and (max-width: 576px) {
-  .auth-card {
-    padding: 1.75rem;
+  .step {
+    font-size: 0.875rem;
+  }
+
+  .step .step-number {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 1rem;
+  }
+
+  .form-navigation {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .profile-placeholder {
+    width: 100px;
+    height: 100px;
+  }
+
+  .btn-upload {
+    padding: 0.4rem 1rem;
+    font-size: 0.75rem;
+  }
+
+  .document-upload-wrapper {
+    padding: 1.5rem;
+  }
+
+  .document-upload {
+    gap: 0.25rem;
   }
 }

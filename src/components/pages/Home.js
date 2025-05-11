@@ -25,7 +25,7 @@ const Home = () => {
       image:
         "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
       quote:
-        "MentorLink helped me find an amazing mentor who guided me through learning React. I landed my dream job within 3 months! The personalized attention and structured approach made all the difference.",
+        "Learnovate helped me find an amazing mentor who guided me through learning React. I landed my dream job within 3 months! The personalized attention and structured approach made all the difference.",
     },
     {
       id: 2,
@@ -35,7 +35,7 @@ const Home = () => {
       image:
         "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
       quote:
-        "Being a mentor on MentorLink has been incredibly rewarding. I've helped several apprentices grow their skills while improving my own leadership abilities. The platform makes it easy to connect and schedule sessions.",
+        "Being a mentor on Learnovate has been incredibly rewarding. I've helped several apprentices grow their skills while improving my own leadership abilities. The platform makes it easy to connect and schedule sessions.",
     },
     {
       id: 3,
@@ -45,7 +45,7 @@ const Home = () => {
       image:
         "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
       quote:
-        "The structured mentorship program at MentorLink helped me transition from academia to industry. My mentor provided invaluable insights about real-world applications of machine learning that you can't learn from books.",
+        "The structured mentorship program at Learnovate helped me transition from academia to industry. My mentor provided invaluable insights about real-world applications of machine learning that you can't learn from books.",
     },
   ]
 
@@ -116,14 +116,14 @@ const Home = () => {
   // FAQ data
   const faqs = [
     {
-      question: "How does MentorLink work?",
+      question: "How does Learnovate work?",
       answer:
-        "MentorLink connects mentors and apprentices based on skills, goals, and availability. Create a profile, browse mentors, request sessions, and start learning. Our platform handles scheduling, communication, and feedback.",
+        "Learnovate connects mentors and apprentices based on skills, goals, and availability. Create a profile, browse mentors, request sessions, and start learning. Our platform handles scheduling, communication, and feedback.",
     },
     {
       question: "How much does it cost?",
       answer:
-        "MentorLink is currently free for all users during our beta period. In the future, we plan to introduce premium features while maintaining core functionality free of charge.",
+        "Learnovate is currently free for all users during our beta period. In the future, we plan to introduce premium features while maintaining core functionality free of charge.",
     },
     {
       question: "How are mentors vetted?",
@@ -216,7 +216,7 @@ const Home = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                MentorLink connects you with industry experts who've been where you want to go. Get personalized
+                Learnovate connects you with industry experts who've been where you want to go. Get personalized
                 guidance, actionable feedback, and the accountability you need to reach your goals faster.
               </motion.p>
 
@@ -467,7 +467,7 @@ const Home = () => {
               animate={featuresInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6 }}
             >
-              Why Choose MentorLink
+              Why Choose Learnovate
             </motion.h2>
             <div className="features-grid">
               <motion.div
@@ -704,7 +704,7 @@ const Home = () => {
             >
               <h2>Ready to Accelerate Your Growth?</h2>
               <p>
-                Join MentorLink today and take the next step in your professional development journey with personalized
+                Join Learnovate today and take the next step in your professional development journey with personalized
                 mentorship.
               </p>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>

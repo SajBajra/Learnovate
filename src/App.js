@@ -21,6 +21,7 @@ import ChatWindow from "./components/messaging/ChatWindow"
 import AdminPanel from "./components/admin/AdminPanel"
 import AdminUsers from "./components/admin/AdminUsers"
 import AdminFeedback from "./components/admin/AdminFeedback"
+import AdminLayout from "./components/admin/AdminLayout"
 import NotFound from "./components/pages/NotFound"
 import LoadingScreen from "./components/common/LoadingScreen"
 import ScheduleManager from "./components/scheduling/ScheduleManager"
@@ -81,160 +82,166 @@ function App() {
   return (
     <Router>
       <div className="app-container">
-        <Navbar
-          isAuthenticated={isAuthenticated}
-          currentUser={currentUser}
-          setIsAuthenticated={setIsAuthenticated}
-          setCurrentUser={setCurrentUser}
-        />
-        <main className="main-content">
-          <AnimatePresence mode="wait">
-            <Routes>
-              <Route path="/" element={<Home />} />
+        <AnimatePresence mode="wait">
+          <Routes>
+            {/* Admin routes with sidebar layout */}
+            <Route
+              path="/admin"
+              element={
+                <AdminRoute>
+                  <AdminLayout currentUser={currentUser} />
+                </AdminRoute>
+              }
+            >
               <Route
-                path="/login"
-                element={
-                  <Login
+                index
+                element={<AdminPanel feedback={feedback} sessionRequests={sessionRequests} users={users} />}
+              />
+              <Route
+                path="users"
+                element={<AdminUsers users={users} setUsers={setUsers} simulateLoading={simulateLoading} />}
+              />
+              <Route path="feedback" element={<AdminFeedback feedback={feedback} users={users} />} />
+            </Route>
+
+            {/* Regular routes with navbar and footer */}
+            <Route
+              path="*"
+              element={
+                <>
+                  <Navbar
+                    isAuthenticated={isAuthenticated}
+                    currentUser={currentUser}
                     setIsAuthenticated={setIsAuthenticated}
                     setCurrentUser={setCurrentUser}
-                    users={users}
-                    simulateLoading={simulateLoading}
                   />
-                }
-              />
-              <Route
-                path="/register"
-                element={
-                  <Register
-                    setIsAuthenticated={setIsAuthenticated}
-                    setCurrentUser={setCurrentUser}
-                    users={users}
-                    setUsers={setUsers}
-                    simulateLoading={simulateLoading}
-                  />
-                }
-              />
-              <Route
-                path="/dashboard"
-                element={
-                  <PrivateRoute>
-                    <Dashboard currentUser={currentUser} sessionRequests={sessionRequests} users={users} />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/profile"
-                element={
-                  <PrivateRoute>
-                    <Profile
-                      currentUser={currentUser}
-                      setCurrentUser={setCurrentUser}
-                      users={users}
-                      setUsers={setUsers}
-                      simulateLoading={simulateLoading}
-                    />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/mentors"
-                element={
-                  <PrivateRoute>
-                    <MentorDirectory
-                      users={users}
-                      currentUser={currentUser}
-                      sessionRequests={sessionRequests}
-                      setSessionRequests={setSessionRequests}
-                      simulateLoading={simulateLoading}
-                    />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/challenges"
-                element={
-                  <PrivateRoute>
-                    <Challenges
-                      currentUser={currentUser}
-                      users={users}
-                      mockChallenges={challenges}
-                      setMockChallenges={setChallenges}
-                    />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/requests"
-                element={
-                  <PrivateRoute>
-                    <SessionRequests
-                      currentUser={currentUser}
-                      sessionRequests={sessionRequests}
-                      setSessionRequests={setSessionRequests}
-                      users={users}
-                      setFeedback={setFeedback}
-                      simulateLoading={simulateLoading}
-                    />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/messages/:userId"
-                element={
-                  <PrivateRoute>
-                    <ChatWindow
-                      currentUser={currentUser}
-                      users={users}
-                      messages={messages}
-                      setMessages={setMessages}
-                      simulateLoading={simulateLoading}
-                    />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/schedule"
-                element={
-                  <PrivateRoute>
-                    <ScheduleManager
-                      currentUser={currentUser}
-                      users={users}
-                      sessionRequests={sessionRequests}
-                      setSessionRequests={setSessionRequests}
-                      simulateLoading={simulateLoading}
-                    />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/admin"
-                element={
-                  <AdminRoute>
-                    <AdminPanel feedback={feedback} sessionRequests={sessionRequests} users={users} />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path="/admin/users"
-                element={
-                  <AdminRoute>
-                    <AdminUsers users={users} setUsers={setUsers} simulateLoading={simulateLoading} />
-                  </AdminRoute>
-                }
-              />
-              <Route
-                path="/admin/feedback"
-                element={
-                  <AdminRoute>
-                    <AdminFeedback feedback={feedback} users={users} />
-                  </AdminRoute>
-                }
-              />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </AnimatePresence>
-        </main>
-        <Footer />
+                  <main className="main-content">
+                    <Routes>
+                      <Route path="/" element={<Home />} />
+                      <Route
+                        path="/login"
+                        element={
+                          <Login
+                            setIsAuthenticated={setIsAuthenticated}
+                            setCurrentUser={setCurrentUser}
+                            users={users}
+                            simulateLoading={simulateLoading}
+                          />
+                        }
+                      />
+                      <Route
+                        path="/register"
+                        element={
+                          <Register
+                            setIsAuthenticated={setIsAuthenticated}
+                            setCurrentUser={setCurrentUser}
+                            users={users}
+                            setUsers={setUsers}
+                            simulateLoading={simulateLoading}
+                          />
+                        }
+                      />
+                      <Route
+                        path="/dashboard"
+                        element={
+                          <PrivateRoute>
+                            <Dashboard currentUser={currentUser} sessionRequests={sessionRequests} users={users} />
+                          </PrivateRoute>
+                        }
+                      />
+                      <Route
+                        path="/profile"
+                        element={
+                          <PrivateRoute>
+                            <Profile
+                              currentUser={currentUser}
+                              setCurrentUser={setCurrentUser}
+                              users={users}
+                              setUsers={setUsers}
+                              simulateLoading={simulateLoading}
+                            />
+                          </PrivateRoute>
+                        }
+                      />
+                      <Route
+                        path="/mentors"
+                        element={
+                          <PrivateRoute>
+                            <MentorDirectory
+                              users={users}
+                              currentUser={currentUser}
+                              sessionRequests={sessionRequests}
+                              setSessionRequests={setSessionRequests}
+                              simulateLoading={simulateLoading}
+                            />
+                          </PrivateRoute>
+                        }
+                      />
+                      <Route
+                        path="/challenges"
+                        element={
+                          <PrivateRoute>
+                            <Challenges
+                              currentUser={currentUser}
+                              users={users}
+                              mockChallenges={challenges}
+                              setMockChallenges={setChallenges}
+                            />
+                          </PrivateRoute>
+                        }
+                      />
+                      <Route
+                        path="/requests"
+                        element={
+                          <PrivateRoute>
+                            <SessionRequests
+                              currentUser={currentUser}
+                              sessionRequests={sessionRequests}
+                              setSessionRequests={setSessionRequests}
+                              users={users}
+                              setFeedback={setFeedback}
+                              simulateLoading={simulateLoading}
+                            />
+                          </PrivateRoute>
+                        }
+                      />
+                      <Route
+                        path="/messages/:userId"
+                        element={
+                          <PrivateRoute>
+                            <ChatWindow
+                              currentUser={currentUser}
+                              users={users}
+                              messages={messages}
+                              setMessages={setMessages}
+                              simulateLoading={simulateLoading}
+                            />
+                          </PrivateRoute>
+                        }
+                      />
+                      <Route
+                        path="/schedule"
+                        element={
+                          <PrivateRoute>
+                            <ScheduleManager
+                              currentUser={currentUser}
+                              users={users}
+                              sessionRequests={sessionRequests}
+                              setSessionRequests={setSessionRequests}
+                              simulateLoading={simulateLoading}
+                            />
+                          </PrivateRoute>
+                        }
+                      />
+                      <Route path="*" element={<NotFound />} />
+                    </Routes>
+                  </main>
+                  <Footer />
+                </>
+              }
+            />
+          </Routes>
+        </AnimatePresence>
         <ToastContainer
           position="bottom-right"
           autoClose={3000}

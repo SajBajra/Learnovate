@@ -29,7 +29,7 @@ const Navbar = ({ isAuthenticated, currentUser, setIsAuthenticated, setCurrentUs
     <nav className="navbar">
       <div className="container navbar-container">
         <Link to="/" className="navbar-logo">
-          <span className="logo-text">LEARNOVATE</span>
+          <span className="logo-text">Learnovate</span>
         </Link>
 
         <div className="menu-icon" onClick={toggleMenu}>

@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="container footer-container">
         <div className="footer-content">
           <div className="footer-section">
-            <h3>MentorLink</h3>
+            <h3>Learnovate</h3>
             <p>Connecting mentors and apprentices for growth and learning.</p>
           </div>
 
@@ -27,13 +27,13 @@ const Footer = () => {
 
           <div className="footer-section">
             <h3>Contact Us</h3>
-            <p>Email: info@mentorlink.com</p>
+            <p>Email: info@learnovate.com</p>
             <p>Phone: (123) 456-7890</p>
           </div>
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} MentorLink. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Learnovate. All rights reserved.</p>
         </div>
       </div>
     </footer>

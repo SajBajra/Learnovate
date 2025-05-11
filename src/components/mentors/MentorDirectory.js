@@ -9,17 +9,25 @@ import "./MentorDirectory.css"
 const MentorDirectory = ({ users, currentUser, sessionRequests, setSessionRequests, simulateLoading }) => {
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedDomain, setSelectedDomain] = useState("")
+  const [selectedCategory, setSelectedCategory] = useState("")
   const [isFiltering, setIsFiltering] = useState(false)
   const navigate = useNavigate()
 
   // Get all mentors
   const mentors = users.filter((user) => user.role === "mentor")
 
+  // Domain categories
+  const domainCategories = {
+    "Web & Mobile": ["Web Development", "Mobile Development", "Frontend Development", "Backend Development"],
+    "Data & AI": ["Data Science", "Machine Learning", "Artificial Intelligence", "Big Data"],
+    Design: ["UI/UX Design", "Graphic Design", "Product Design"],
+    "DevOps & Cloud": ["DevOps", "Cloud Computing", "System Administration"],
+    Security: ["Cybersecurity", "Network Security", "Ethical Hacking"],
+    Other: ["Game Development", "Blockchain", "IoT", "Embedded Systems"],
+  }
+
   // Get all unique domains from mentors
   const uniqueDomains = [...new Set(mentors.map((mentor) => mentor.domain).filter(Boolean))]
-
-  // Get all unique skills from mentors
-  const allSkills = [...new Set(mentors.flatMap((mentor) => mentor.skills || []))]
 
   // Filter mentors based on search term and filters
   const filteredMentors = mentors.filter((mentor) => {
@@ -30,8 +38,14 @@ const MentorDirectory = ({ users, currentUser, sessionRequests, setSessionReques
       (mentor.domain && mentor.domain.toLowerCase().includes(searchTerm.toLowerCase()))
 
     const matchesDomain = !selectedDomain || mentor.domain === selectedDomain
+    const matchesCategory =
+      !selectedCategory ||
+      (mentor.domain &&
+        Object.entries(domainCategories).some(
+          ([category, domains]) => category === selectedCategory && domains.includes(mentor.domain),
+        ))
 
-    return matchesSearch && matchesDomain
+    return matchesSearch && (matchesDomain || matchesCategory)
   })
 
   // Animation when filters change
@@ -41,13 +55,13 @@ const MentorDirectory = ({ users, currentUser, sessionRequests, setSessionReques
       setIsFiltering(false)
     }, 300)
     return () => clearTimeout(timer)
-  }, [searchTerm, selectedDomain])
+  }, [searchTerm, selectedDomain, selectedCategory])
 
   const handleViewProfile = (mentor) => {
     navigate(`/mentor/${mentor.id}`)
   }
 
-  const handleViewAvailability = (mentor) => {
+  const handleViewSchedule = (mentor) => {
     navigate(`/schedule?mentorId=${mentor.id}`)
   }
 
@@ -101,31 +115,72 @@ const MentorDirectory = ({ users, currentUser, sessionRequests, setSessionReques
             </div>
 
             <div className="filters">
-              <div className="filter">
-                <label htmlFor="domain-filter">
-                  <i className="fas fa-globe filter-icon"></i>
-                  Filter by Domain
-                </label>
-                <div className="skill-filter-options">
+              <div className="domain-categories">
+                <button
+                  className={`category-btn ${selectedCategory === "" ? "active" : ""}`}
+                  onClick={() => {
+                    setSelectedCategory("")
+                    setSelectedDomain("")
+                  }}
+                >
+                  <i className="fas fa-globe"></i>
+                  All Categories
+                </button>
+
+                {Object.keys(domainCategories).map((category) => (
                   <button
-                    className={`skill-filter-btn ${selectedDomain === "" ? "active" : ""}`}
-                    onClick={() => setSelectedDomain("")}
+                    key={category}
+                    className={`category-btn ${selectedCategory === category ? "active" : ""}`}
+                    onClick={() => {
+                      setSelectedCategory(category)
+                      setSelectedDomain("")
+                    }}
                   >
-                    <i className="fas fa-globe-americas"></i>
-                    All Domains
+                    <i
+                      className={`fas ${
+                        category === "Web & Mobile"
+                          ? "fa-laptop-code"
+                          : category === "Data & AI"
+                            ? "fa-brain"
+                            : category === "Design"
+                              ? "fa-paint-brush"
+                              : category === "DevOps & Cloud"
+                                ? "fa-cloud"
+                                : category === "Security"
+                                  ? "fa-shield-alt"
+                                  : "fa-code-branch"
+                      }`}
+                    ></i>
+                    {category}
                   </button>
-                  {uniqueDomains.map((domain, index) => (
-                    <button
-                      key={index}
-                      className={`skill-filter-btn ${selectedDomain === domain ? "active" : ""}`}
-                      onClick={() => setSelectedDomain(domain)}
-                    >
-                      <i className="fas fa-code-branch"></i>
-                      {domain}
-                    </button>
-                  ))}
-                </div>
+                ))}
               </div>
+
+              {selectedCategory && (
+                <div className="domain-filter">
+                  <div className="domain-label">
+                    <i className="fas fa-filter"></i>
+                    <span>Filter by Domain:</span>
+                  </div>
+                  <div className="domain-options">
+                    <button
+                      className={`domain-option ${selectedDomain === "" ? "active" : ""}`}
+                      onClick={() => setSelectedDomain("")}
+                    >
+                      All {selectedCategory} Domains
+                    </button>
+                    {domainCategories[selectedCategory].map((domain) => (
+                      <button
+                        key={domain}
+                        className={`domain-option ${selectedDomain === domain ? "active" : ""}`}
+                        onClick={() => setSelectedDomain(domain)}
+                      >
+                        {domain}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </motion.div>
 
@@ -141,7 +196,7 @@ const MentorDirectory = ({ users, currentUser, sessionRequests, setSessionReques
 
           <AnimatePresence mode="wait">
             <motion.div
-              key={`${searchTerm}-${selectedDomain}`}
+              key={`${searchTerm}-${selectedDomain}-${selectedCategory}`}
               className="mentors-grid"
               variants={containerVariants}
               initial="hidden"
@@ -187,7 +242,7 @@ const MentorDirectory = ({ users, currentUser, sessionRequests, setSessionReques
                     <div className="mentor-actions">
                       <motion.button
                         className="btn btn-primary"
-                        onClick={() => handleViewAvailability(mentor)}
+                        onClick={() => handleViewSchedule(mentor)}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
@@ -200,8 +255,8 @@ const MentorDirectory = ({ users, currentUser, sessionRequests, setSessionReques
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <i className="fas fa-laptop-code"></i>
-                        View Challenges
+                        <i className="fas fa-calendar-check"></i>
+                        View Schedule
                       </motion.button>
                     </div>
                   </motion.div>
@@ -219,6 +274,7 @@ const MentorDirectory = ({ users, currentUser, sessionRequests, setSessionReques
                     onClick={() => {
                       setSearchTerm("")
                       setSelectedDomain("")
+                      setSelectedCategory("")
                     }}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}

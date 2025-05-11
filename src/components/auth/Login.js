@@ -43,7 +43,7 @@ const Login = ({ setIsAuthenticated, setCurrentUser, users }) => {
   return (
     <div className="auth-container">
       <div className="auth-card">
-        <h2>Login to MentorLink</h2>
+        <h2>Login to Learnovate</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">Email</label>

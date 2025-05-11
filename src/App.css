@@ -1,17 +1,16 @@
-/* Global Styles */
 :root {
-  --primary-color: #2563eb;
-  --primary-dark: #1d4ed8;
-  --primary-light: #3b82f6;
-  --secondary-color: #0f172a;
-  --accent-color: #0ea5e9;
-  --light-color: #f8fafc;
-  --dark-color: #1e293b;
-  --success-color: #10b981;
-  --danger-color: #ef4444;
-  --warning-color: #f59e0b;
-  --info-color: #0ea5e9;
-  --border-color: #e2e8f0;
+  /* Color palette - Teal */
+  --primary-color: #148FA8;
+  --primary-dark: #0f6e81;
+  --primary-light: #36a9c0;
+  --primary-lighter: #7fcada;
+  --primary-lightest: #c2e7f0;
+
+  /* Accent colors */
+  --accent-color: #127c92;
+  --accent-light: #4eb9cd;
+
+  /* Neutral colors */
   --gray-50: #f8fafc;
   --gray-100: #f1f5f9;
   --gray-200: #e2e8f0;
@@ -22,17 +21,19 @@
   --gray-700: #334155;
   --gray-800: #1e293b;
   --gray-900: #0f172a;
+
+  /* Feedback colors */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --info: #3b82f6;
+
+  /* UI elements */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  --transition: all 0.3s ease;
-  --transition-fast: all 0.15s ease;
-  --transition-slow: all 0.5s ease;
-  --radius-sm: 0.25rem;
-  --radius: 0.5rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1rem;
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --radius: 8px;
+  --radius-lg: 12px;
   --radius-full: 9999px;
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
     "Helvetica Neue", sans-serif;
@@ -40,10 +41,11 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
 
+/* Global styles */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 html {
@@ -51,18 +53,20 @@ html {
 }
 
 body {
-  font-family: var(--font-sans);
-  line-height: 1.6;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
   color: var(--gray-800);
-  background-color: var(--gray-100);
+  background-color: var(--gray-50);
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
 a {
-  text-decoration: none;
   color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
   transition: var(--transition);
 }
 
@@ -93,6 +97,10 @@ button,
   gap: 0.5rem;
   position: relative;
   overflow: hidden;
+}
+
+button {
+  cursor: pointer;
 }
 
 button::after,
@@ -208,6 +216,7 @@ button:focus:not(:active)::after,
 }
 
 .container {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1.5rem;
@@ -268,7 +277,7 @@ button:focus:not(:active)::after,
 }
 
 .text-primary {
-  color: var(--primary-color);
+  color: var(--primary-color) !important;
 }
 
 .text-secondary {
@@ -467,8 +476,33 @@ button:focus:not(:active)::after,
 
 .main-content {
   flex: 1;
-  padding: 0; /* Changed from 2rem 0 to remove extra spacing */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.bg-primary {
+  background-color: var(--primary-color) !important;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
 /* Page transitions */
@@ -569,6 +603,10 @@ button:focus:not(:active)::after,
 
   .hide-sm {
     display: none;
+  }
+
+  .container {
+    padding: 0 1rem;
   }
 }
 
